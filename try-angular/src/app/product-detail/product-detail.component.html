@@ -1,1 +1,16 @@
-<p>product-detail works!</p>
+<div *ngIf="product">
+    <h2>{{product.name | uppercase}} Details</h2>
+    <div>id: {{product.id}}</div>
+    <div>
+        <label for="product-name">Product name: </label>
+        <input id="product-name" [(ngModel)]="product.name" placeholder="name"><br>
+        <label for="category">Category: </label>
+        <input id="category" [(ngModel)]="product.category" placeholder="category"><br>
+        <label for="manufacturer">Manufacturer: </label>
+        <input id="manufacturer" [(ngModel)]="product.manufacturer" placeholder="manufacturer"><br>
+        <label for="price">Price: </label>
+        <input id="price" [(ngModel)]="product.price" placeholder="price"><br>
+        <label for="description">Description: </label>
+        <input id="description" [(ngModel)]="product.description" placeholder="description"><br>
+    </div>
+</div>

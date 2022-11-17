@@ -18,4 +18,9 @@ export class ProductService {
     return products;
   }
 
+  getProduct(id: number): Observable<Product> {
+
+    this.messageService.add(`ProductService: fetched product id=${id}`);
+    return of();
+  }
 }

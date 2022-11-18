@@ -6,3 +6,32 @@
     </a>
   </li>
 </ul>
+
+<div>
+  <form>
+    <label for="new-id">Product ID: </label>
+    <input id="new-id" #productID /><br>
+    <label for="new-product">Product name: </label>
+    <input id="new-product" #productName /><br>
+    <label for="category">Category: </label>
+    <input id="category" #category/><br>
+    <label for="manufacturer">Manufacturer: </label>
+    <input id="manufacturer" #manufacturer /><br>
+    <label for="description">Description: </label>
+    <input id="description" #description /><br>
+    <label for="price">Price: </label>
+    <input id="price" #price /><br>
+  </form>
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(
+    productID.value,
+    productName.value,
+    category.value,
+    manufacturer.value,
+    description.value,
+    price.value
+  ); productName.value=''">
+    Add product
+  </button>
+</div>

@@ -14,6 +14,10 @@ export class ProductService {
 
   private productsUrl = 'http://127.0.0.1:8000/api/products/'
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
@@ -49,7 +53,7 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productsUrl)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
+        tap(_ => this.log('fetched products')),
         catchError(this.handleError<Product[]>('getProducts', []))
     );
   }
@@ -60,6 +64,15 @@ export class ProductService {
     return this.http.get<Product>(url).pipe(
       tap(_ => this.log(`fetched product id=${id}`)),
       catchError(this.handleError<Product>(`getProduct id=${id}`))
+    );
+  }
+
+  /** PUT: update the product on the server */
+  updateProduct(id: number, product: Product): Observable<any> {
+    const url = `${this.productsUrl}${id}`;
+    return this.http.put(url, product, this.httpOptions).pipe(
+      tap(_ => this.log(`updated product id=${product.id}`)),
+      catchError(this.handleError<any>('updateProduct'))
     );
   }
 }

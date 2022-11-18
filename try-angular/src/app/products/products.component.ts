@@ -48,4 +48,9 @@ export class ProductsComponent implements OnInit {
         this.products.push(product);
       });
   }
+
+  delete(product: Product): void {
+    this.products = this.products.filter(p => p !== product);
+    this.productService.deleteProduct(product.id).subscribe();
+  }
 }

@@ -5,7 +5,9 @@ label {
   }
   input {
     font-size: 1em;
-    padding: .5rem;
+    padding: .3rem;
+    width: 20%;
+    display: block;
   }
   button {
     margin-top: 20px;

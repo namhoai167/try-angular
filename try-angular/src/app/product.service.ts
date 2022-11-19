@@ -93,4 +93,30 @@ export class ProductService {
       catchError(this.handleError<Product>('deleteProduct'))
     );
   }
+
+  /* GET products whose name contains search term */
+  searchProducts(obj: any): Observable<Product[]> {
+    const query = obj["query"]
+    const type = obj["type"]
+    if (!query.trim()) {
+      // if not search term, return empty product array.
+      return of([]);
+    }
+
+    if (type == "Category") {
+      return this.http.get<Product[]>(`${this.productsUrl}?category=${query}`).pipe(
+        tap(x => x.length ?
+          this.log(`found products matching category: "${query}"`) :
+          this.log(`no products matching category: "${query}"`)),
+        catchError(this.handleError<Product[]>('searchProducts', []))
+      );
+    }
+
+    return this.http.get<Product[]>(`${this.productsUrl}?manufacturer=${query}`).pipe(
+      tap(x => x.length ?
+        this.log(`found products matching manufacturer: "${query}"`) :
+        this.log(`no products matching manufacturer: "${query}"`)),
+      catchError(this.handleError<Product[]>('searchProducts', []))
+    );
+  }
 }

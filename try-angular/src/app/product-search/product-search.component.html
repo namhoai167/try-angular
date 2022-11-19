@@ -1,1 +1,14 @@
-<p>product-search works!</p>
+<div id="search-component">
+    <label for="category-box">Category lookup</label>
+    <input #categoryBox id="category-box" (input)="search('Category', categoryBox.value)" />
+    <label for="manufacturer-box">Manufacturer search</label>
+    <input #manufacturerBox id="manufacturer-box" (input)="search('Manufacturer', manufacturerBox.value)" />
+
+    <ul class="search-result">
+        <li *ngFor="let product of products$ | async" >
+            <a routerLink="/products/{{product.id}}">
+                {{product.name}}
+            </a>
+        </li>
+    </ul>
+</div>

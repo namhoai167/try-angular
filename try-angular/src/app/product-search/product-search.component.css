@@ -10,7 +10,8 @@ label {
   }
   input {
     padding: .3rem;
-    width: 20%;
+    width: 100%;
+    width: 375px;
     box-sizing: border-box;
     display: block;
   }
@@ -28,7 +29,7 @@ label {
     border-right: 1px solid gray;
     display: inline-block;
     width: 100%;
-    max-width: 600px;
+    max-width: 375px;
     padding: .5rem;
     box-sizing: border-box;
     text-decoration: none;

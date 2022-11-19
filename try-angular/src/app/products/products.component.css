@@ -8,7 +8,8 @@
 
 input {
   display: block;
-  width: 20%;
+  width: 100%;
+  width: 375px;
   padding: .3rem;
   margin: 0.1rem 0;
   box-sizing: border-box;

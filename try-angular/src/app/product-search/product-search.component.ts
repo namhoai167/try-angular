@@ -20,15 +20,18 @@ export class ProductSearchComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   // Push a search term into the observable stream.
-  search(type:string, query: string): void {
-    const jsonObj: any = {"type": type, "query": query}
-    this.searchTerms.next(jsonObj);
+  search(category:string, manufacturer: string): void {
+    const searchTerms: any = {
+      "category": category,
+      "manufacturer": manufacturer
+    }
+    this.searchTerms.next(searchTerms);
   }
 
   ngOnInit(): void {
     this.products$ = this.searchTerms.pipe(
       // wait 500ms after each keystroke before considering the term
-      debounceTime(500),
+      // debounceTime(500),
 
       // ignore new term if same as previous term
       distinctUntilChanged(),

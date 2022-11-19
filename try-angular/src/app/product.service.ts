@@ -95,27 +95,42 @@ export class ProductService {
   }
 
   /* GET products whose name contains search term */
-  searchProducts(obj: any): Observable<Product[]> {
-    const query = obj["query"]
-    const type = obj["type"]
-    if (!query.trim()) {
+  searchProducts(searchTerms: any): Observable<Product[]> {
+    const category = searchTerms["category"]
+    const manufacturer = searchTerms["manufacturer"]
+    if (!category.trim() && !manufacturer.trim()) {
       // if not search term, return empty product array.
       return of([]);
     }
 
-    if (type == "Category") {
-      return this.http.get<Product[]>(`${this.productsUrl}?category=${query}`).pipe(
+    if (category && manufacturer) {
+      return this.http.get<Product[]>(
+        `${this.productsUrl}?category=${category}&manufacturer=${manufacturer}`
+      ).pipe(
         tap(x => x.length ?
-          this.log(`found products matching category: "${query}"`) :
-          this.log(`no products matching category: "${query}"`)),
+          this.log(
+            `found products matching category: "${category} and manufacturer: ${manufacturer}"`
+          ) :
+          this.log(
+            `no products matching category: "${category}" and manufacturer: "${manufacturer}"`
+          )),
         catchError(this.handleError<Product[]>('searchProducts', []))
       );
     }
 
-    return this.http.get<Product[]>(`${this.productsUrl}?manufacturer=${query}`).pipe(
+    if (category) {
+      return this.http.get<Product[]>(`${this.productsUrl}?category=${category}`).pipe(
+        tap(x => x.length ?
+          this.log(`found products matching category: "${category}"`) :
+          this.log(`no products matching category: "${category}"`)),
+        catchError(this.handleError<Product[]>('searchProducts', []))
+      );
+    }
+
+    return this.http.get<Product[]>(`${this.productsUrl}?manufacturer=${category}`).pipe(
       tap(x => x.length ?
-        this.log(`found products matching manufacturer: "${query}"`) :
-        this.log(`no products matching manufacturer: "${query}"`)),
+        this.log(`found products matching manufacturer: "${category}"`) :
+        this.log(`no products matching manufacturer: "${category}"`)),
       catchError(this.handleError<Product[]>('searchProducts', []))
     );
   }

@@ -10,7 +10,6 @@ label {
   }
   input {
     padding: .3rem;
-    width: 100%;
     width: 375px;
     box-sizing: border-box;
     display: block;
@@ -24,6 +23,7 @@ label {
     list-style-type: none;
   }
   .search-result li a {
+    border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     border-left: 1px solid gray;
     border-right: 1px solid gray;
@@ -44,4 +44,12 @@ label {
   ul.search-result {
     margin-top: 0;
     padding-left: 0;
+  }
+  button {
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  button:hover {
+    background-color: #42545C;
   }

@@ -1,8 +1,9 @@
 <div id="search-component">
-    <label for="category-box">Category lookup</label>
-    <input #categoryBox id="category-box" (input)="search('Category', categoryBox.value)" />
-    <label for="manufacturer-box">Manufacturer search</label>
-    <input #manufacturerBox id="manufacturer-box" (input)="search('Manufacturer', manufacturerBox.value)" />
+    <label for="category-box">Category</label>
+    <input #categoryBox id="category-box" />
+    <label for="manufacturer-box">Manufacturer</label>
+    <input #manufacturerBox id="manufacturer-box"/>
+    <button type="button" (click)="search(categoryBox.value, manufacturerBox.value)">Find</button>
 
     <ul class="search-result">
         <li *ngFor="let product of products$ | async" >
